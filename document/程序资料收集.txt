@@ -1,0 +1,20 @@
+X window
+
+If an xterm is resized the contents on your text windows might be messed up. To handle this gracefully you should redraw all the stuff based on the new height and width of the screen. When resizing happens, your program is sent a SIGWINCH signal. You should catch this signal and do redrawing accordingly. Here is some hint.
+如果一个xterm被调整大小，您的文本窗口上的内容可能会被弄乱。 为了优雅地处理，您应该根据屏幕的新高度和宽度重新绘制所有内容。 当调整大小时，您的程序发送SIGWINCH信号。 你应该抓住这个信号，并相应地重新绘制。 这里有一些提示。
+
+ #include <signal.h>
+ void* resizeHandler(int);
+
+ int main(void) {
+      ...
+      signal(SIGWINCH, resizeHandler);
+      ...
+ }
+
+ void* resizeHandler(int sig)
+ {
+      int nh, nw;
+      getmaxyx(stdscr, nh, nw);  /* get the new screen size */
+      ...
+ }
