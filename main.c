@@ -1,7 +1,10 @@
 #include <ncurses.h>
 #include <stdlib.h>
+#include <signal.h>
 
 #define MAXLEN 128
+
+void* resizeHandler(int);
 
 typedef struct Line {
     char contents[MAXLEN];
@@ -31,6 +34,8 @@ int main(int argc, char **argv)
     keypad(stdscr, TRUE);   // for KEY_UP, KEY_DOWN
     getmaxyx(stdscr, term_rows, term_cols);
     addstr("Reading text...\n");
+	
+	signal(SIGWINCH, resizeHandler);
 
     load(argv[1]);
 
@@ -85,4 +90,15 @@ void draw(Line *l)
     clear();
     for (i = 0; i < term_rows && l != NULL; i++, l = l->next)
         addstr(l->contents);
+}
+
+void* resizeHandler(int sig)
+{
+	getmaxyx(stdscr, term_rows, term_cols);  /* get the new screen size */
+	clear();
+	refresh();
+ 	curr = head;
+    curr_line = 0;
+	draw(curr);
+	refresh();
 }
