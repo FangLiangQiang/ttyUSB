@@ -45,6 +45,7 @@ static struct Action insert_actions[] = {
     { KEY_LEFT,      prevchar,  INSERT },
     { '\n',          newline,   INSERT },
     { '\r',          newline,   INSERT },
+    { 127, 			 backchar,  INSERT },
     { KEY_BACKSPACE, backchar,  INSERT },
     { KEY_DC,        delchar,   INSERT },
     { CTRL('c'),     NULL,      NORMAL },
