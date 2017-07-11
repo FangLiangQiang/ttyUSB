@@ -1,4 +1,4 @@
-# sandy - simple ncurses editor
+# TextEdit - simple ncurses editor
 # See LICENSE file for copyright and license details.
 
 include config.mk
@@ -8,14 +8,14 @@ include config.mk
 
 HDR = arg.h
 
-SRC = sandy.c
+SRC = textedit.c
 
 OBJ = $(SRC:.c=.o)
 
-all: options sandy
+all: options textedit
 
 options:
-	@echo sandy build options:
+	@echo textedit build options:
 	@echo "CFLAGS   = $(CFLAGS)"
 	@echo "LDFLAGS  = $(LDFLAGS)"
 	@echo "CC       = $(CC)"
@@ -34,28 +34,28 @@ config.h:
 	@echo creating $@ from config.def.h
 	@cp config.def.h $@
 
-sandy: $(OBJ)
+textedit: $(OBJ)
 	@echo CC -o $@
 	@$(CC) -o $@ $(OBJ) $(LDFLAGS)
 
 clean:
 	@echo cleaning
-	@rm -f sandy $(OBJ) sandy-$(VERSION).tar.gz
+	@rm -f textedit $(OBJ) textedit-$(VERSION).tar.gz
 
 dist: clean
 	@echo creating dist tarball
-	@mkdir -p sandy-$(VERSION)
+	@mkdir -p textedit-$(VERSION)
 	@cp -R LICENSE Makefile config.mk config.def.h \
-		README TODO sandy.1 $(HDR) $(SRC) sandy-$(VERSION)
-	@tar -cf sandy-$(VERSION).tar sandy-$(VERSION)
-	@gzip sandy-$(VERSION).tar
-	@rm -rf sandy-$(VERSION)
+		README TODO sandy.1 $(HDR) $(SRC) textedit-$(VERSION)
+	@tar -cf textedit-$(VERSION).tar textedit-$(VERSION)
+	@gzip textedit-$(VERSION).tar
+	@rm -rf textedit-$(VERSION)
 
 install: all
 	@echo installing executable file to $(DESTDIR)$(PREFIX)/bin
 	@mkdir -p $(DESTDIR)$(PREFIX)/bin
-	@cp -f sandy $(DESTDIR)$(PREFIX)/bin
-	@chmod 755 $(DESTDIR)$(PREFIX)/bin/sandy
+	@cp -f textedit $(DESTDIR)$(PREFIX)/bin
+	@chmod 755 $(DESTDIR)$(PREFIX)/bin/textedit
 	@echo installing manual page to $(DESTDIR)$(MANPREFIX)/man1
 	@mkdir -p $(DESTDIR)$(MANPREFIX)/man1
 	@sed "s/VERSION/$(VERSION)/g" < sandy.1 > $(DESTDIR)$(MANPREFIX)/man1/sandy.1
@@ -63,7 +63,7 @@ install: all
 
 uninstall:
 	@echo removing executable file from $(DESTDIR)$(PREFIX)/bin
-	@rm -f $(DESTDIR)$(PREFIX)/bin/sandy
+	@rm -f $(DESTDIR)$(PREFIX)/bin/textedit
 	@echo removing manual page from $(DESTDIR)$(MANPREFIX)/man1
 	@rm -f $(DESTDIR)$(MANPREFIX)/man1/sandy.1
 
