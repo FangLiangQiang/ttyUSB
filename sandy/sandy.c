@@ -758,7 +758,7 @@ i_addtext(char *buf, Filepos pos) {
 	vlines = VLINES(l);
 	for(c = buf[0]; c != '\0'; c = buf[++i]) {
 		/* newline / line feed */
-		if(c == '\n' || c == '\r') {
+		if(c == '\n'/* || c == '\r'*/) {
 			lnew = (Line *)ecalloc(1, sizeof(Line));
 			lnew->c = ecalloc(1, LINSIZ);
 			lnew->dirty = l->dirty = TRUE;
