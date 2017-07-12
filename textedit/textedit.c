@@ -299,7 +299,6 @@ static regex_t *cmd_res[LEN(cmds)];
 static regex_t *syntax_file_res[LEN(syntaxes)];
 static regex_t *syntax_res[LEN(syntaxes)][SYN_COLORS];
 
-//char *argv0;
 
 static void *
 ecalloc(size_t nmemb, size_t size) {
@@ -1985,8 +1984,8 @@ i_update(void) {
 }
 
 /* Print help, die */
-void
-i_usage(void) {
+void i_usage(void) 
+{
 	i_die("sandy - simple editor\n"
 	      "usage: sandy [-a] [-d] [-r] [-u] [-t TABSTOP] [-S] [-s SYNTAX] [file | -]\n");
 }
