@@ -299,7 +299,7 @@ static regex_t *cmd_res[LEN(cmds)];
 static regex_t *syntax_file_res[LEN(syntaxes)];
 static regex_t *syntax_res[LEN(syntaxes)][SYN_COLORS];
 
-char *argv0;
+//char *argv0;
 
 static void *
 ecalloc(size_t nmemb, size_t size) {
@@ -2317,8 +2317,8 @@ t_warn(void) {
 }
 
 /* main() starts everything else */
-int
-main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) 
+{
 	char *local_syn = NULL;
 
 	/* Use system locale, hopefully UTF-8 */
